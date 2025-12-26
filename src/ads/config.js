@@ -8,10 +8,6 @@ export const ADS = {
     scriptUrl: 'https://autographmarquisbuffet.com/9d529b1d3801b0dc7a28884475a05200/invoke.js',
     height: 90,
     width: 728
-  },
-  webPush: {
-    scriptUrl: 'https://js.wpadmngr.com/static/adManager.js',
-    admpid: '406397'
   }
 };
 

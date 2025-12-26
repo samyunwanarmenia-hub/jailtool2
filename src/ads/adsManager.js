@@ -71,7 +71,7 @@ const shouldShowBanner = (container) => {
 };
 
 export const initWebPush = () => {
-  if (!ADS.webPush || !ADS.webPush.scriptUrl) return () => {};
+  if (!ADS.webPush) return () => {};
 
   const webPushKey = 'ads_webpush_fired_at';
 
@@ -84,14 +84,19 @@ export const initWebPush = () => {
     return () => {};
   }
 
-  injectScriptOnce({
-    id: 'wpadmngr-webpush-script',
-    src: ADS.webPush.scriptUrl,
-    parent: document.head,
-    async: true,
-    attrs: {
-      'data-admpid': ADS.webPush.admpid
-    }
+  // Load all wpadmngr ad scripts
+  const admpids = ['406421', '406397', '406423', '406425'];
+  
+  admpids.forEach((admpid, index) => {
+    injectScriptOnce({
+      id: `wpadmngr-webpush-script-${admpid}`,
+      src: 'https://js.wpadmngr.com/static/adManager.js',
+      parent: document.head,
+      async: true,
+      attrs: {
+        'data-admpid': admpid
+      }
+    });
   });
 
   markWebPush();
