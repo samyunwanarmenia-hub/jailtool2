@@ -9,3 +9,8 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self' https: 'unsafe-inline' 'unsafe-eval' data:; script-src 'self' https: 'unsafe-inline' 'unsafe-eval' https://js.wpadmngr.com https://autographmarquisbuffet.com *.clickadilla.com *.mrectb.com; frame-src 'self' https: data: https://autographmarquisbuffet.com *.clickadilla.com *.mrectb.com; img-src 'self' https: data:; style-src 'self' https: 'unsafe-inline';"
