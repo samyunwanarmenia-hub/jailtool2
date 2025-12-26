@@ -11,7 +11,7 @@
   status = 200
 
 # ============================================
-# HEADERS ДЛЯ SERVICE WORKER (Web Push)
+# SERVICE WORKER HEADERS
 # ============================================
 [[headers]]
   for = "/IKuNTu.js"
@@ -19,29 +19,25 @@
     Content-Type = "application/javascript; charset=utf-8"
     Service-Worker-Allowed = "/"
     Cache-Control = "public, max-age=0, must-revalidate"
+    Access-Control-Allow-Origin = "*"
 
 # ============================================
-# ОБЩИЕ HEADERS - РАЗРЕШАЕМ ВСЕ РЕКЛАМНЫЕ ДОМЕНЫ
+# ОСНОВНЫЕ HEADERS - МАКСИМАЛЬНО РАЗРЕШАЮЩИЕ
 # ============================================
 [[headers]]
   for = "/*"
   [headers.values]
-    # УПРОЩЕННЫЙ CSP - разрешаем все HTTPS
-    Content-Security-Policy = """
-      default-src 'self' https: 'unsafe-inline' 'unsafe-eval' data: blob:;
-      script-src 'self' https: 'unsafe-inline' 'unsafe-eval';
-      frame-src 'self' https: data:;
-      img-src 'self' https: data: blob:;
-      style-src 'self' https: 'unsafe-inline';
-      connect-src 'self' https:;
-      worker-src 'self' blob:;
-    """
+    # Разрешаем ВСЕ для рекламных скриптов
+    Content-Security-Policy = "default-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' data: blob:; script-src 'self' https: http: 'unsafe-inline' 'unsafe-eval'; frame-src 'self' https: http: data:; img-src 'self' https: http: data: blob:; style-src 'self' https: http: 'unsafe-inline'; connect-src 'self' https: http:; worker-src 'self' blob:;"
     
-    # Разрешаем все для рекламы
+    # Разрешающие CORS для всех доменов
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "*"
+    
+    # Базовая безопасность
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "no-referrer-when-downgrade"
     
-    # CORS для рекламных скриптов
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
-    Access-Control-Allow-Headers = "*"
+    # Permissions для Web Push
+    Permissions-Policy = "interest-cohort=()"
