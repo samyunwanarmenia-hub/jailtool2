@@ -56,94 +56,12 @@
   <div id="root"></div>
 
   <!-- ============================================ -->
-  <!-- WEB PUSH MANAGER ЗАГРУЗКА С ПОВТОРАМИ       -->
+  <!-- CLICKADILLA WEB PUSH SCRIPTS                 -->
   <!-- ============================================ -->
-  <script>
-  (function() {
-    'use strict';
-    
-    // Конфигурация всех зон Web Push Manager
-    const zones = [
-      { id: '406421', type: 'popunder', name: 'Popunder' },
-      { id: '406423', type: 'webpush', name: 'Web Push' },
-      { id: '406425', type: 'inpage', name: 'Inpage Push' },
-      { id: '406397', type: 'zone4', name: 'Zone 4' }
-    ];
-    
-    let successCount = 0;
-    let failedZones = [];
-    const totalZones = zones.length;
-    
-    // Функция загрузки зоны с повторными попытками
-    function loadZone(zone, attempt = 1, maxAttempts = 3) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.type = 'text/javascript';
-      script.setAttribute('data-admpid', zone.id);
-      
-      // Используем protocol-relative URL для совместимости с HTTP/HTTPS
-      const urls = [
-        '//js.wpadmngr.com/static/adManager.js'
-      ];
-      
-      script.src = urls[attempt - 1] || urls[0];
-      
-      script.onload = function() {
-        successCount++;
-        console.log(`✅ [Web Push] ${zone.name} (${zone.id}) loaded successfully [${successCount}/${totalZones}]`);
-        
-        if (successCount === totalZones) {
-          console.log('🎉 [Web Push] All zones loaded!');
-        }
-      };
-      
-      script.onerror = function() {
-        console.error(`❌ [Web Push] ${zone.name} (${zone.id}) failed - attempt ${attempt}/${maxAttempts}`);
-        
-        if (attempt < maxAttempts) {
-          console.log(`🔄 [Web Push] Retrying ${zone.name}...`);
-          setTimeout(() => loadZone(zone, attempt + 1, maxAttempts), 2000);
-        } else {
-          failedZones.push(zone);
-          console.error(`⛔ [Web Push] ${zone.name} (${zone.id}) failed after ${maxAttempts} attempts`);
-          
-          // Если все зоны попытались загрузиться
-          if (successCount + failedZones.length === totalZones) {
-            console.log(`📊 [Web Push] Final: ${successCount} loaded, ${failedZones.length} failed`);
-            if (failedZones.length > 0) {
-              console.warn('⚠️ Failed zones:', failedZones.map(z => z.name).join(', '));
-              console.log('💡 Check: Ad blocker disabled? Network connection OK?');
-            }
-          }
-        }
-      };
-      
-      document.body.appendChild(script);
-    }
-    
-    // Начать загрузку всех зон
-    function initializeWebPush() {
-      console.log('🚀 [Web Push] Initializing Web Push Manager...');
-      console.log(`📋 [Web Push] Loading ${totalZones} zones...`);
-      
-      zones.forEach((zone, index) => {
-        // Задержка между зонами чтобы избежать одновременных запросов
-        setTimeout(() => {
-          console.log(`⏳ [Web Push] Loading ${zone.name} (${zone.id})...`);
-          loadZone(zone);
-        }, index * 800);
-      });
-    }
-    
-    // Запуск после загрузки DOM
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializeWebPush);
-    } else {
-      initializeWebPush();
-    }
-    
-  })();
-  </script>
+  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="406421"></script>
+  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="406423"></script>
+  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="406425"></script>
+  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="406397"></script>
 
   <!-- ============================================ -->
   <!-- ADSTERRA MREC 300x250                       -->
