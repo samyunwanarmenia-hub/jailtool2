@@ -56,59 +56,44 @@
   <div id="root"></div>
 
   <!-- ============================================ -->
-  <!-- ИНИЦИАЛИЗАЦИЯ WEB PUSH MANAGER              -->
-  <!-- Загружаем скрипты ПОСЛЕДОВАТЕЛЬНО           -->
+  <!-- WEB PUSH MANAGER - ПРЯМАЯ ЗАГРУЗКА          -->
+  <!-- Используем обычные <script> теги            -->
   <!-- ============================================ -->
-  <script>
-    (function() {
-      'use strict';
-      
-      var zones = [
-        { id: '406421', name: 'popunder3' },    // Popunder
-        { id: '406423', name: 'webpush3' },     // Web Push
-        { id: '406425', name: 'inpage3' },      // Inpage Push
-        { id: '406397', name: 'zone4' }         // Дополнительная зона
-      ];
-      
-      var currentZone = 0;
-      
-      function loadNextZone() {
-        if (currentZone >= zones.length) {
-          console.log('[Ads] All Web Push Manager zones loaded');
-          return;
-        }
-        
-        var zone = zones[currentZone];
-        var script = document.createElement('script');
-        script.src = 'https://js.wpadmngr.com/static/adManager.js';
-        script.async = true;
-        script.setAttribute('data-admpid', zone.id);
-        
-        script.onload = function() {
-          console.log('[Ads] Zone loaded:', zone.name, '(' + zone.id + ')');
-          currentZone++;
-          // Задержка 300мс между зонами для избежания конфликтов
-          setTimeout(loadNextZone, 300);
-        };
-        
-        script.onerror = function() {
-          console.error('[Ads] Failed to load zone:', zone.name, '(' + zone.id + ')');
-          currentZone++;
-          setTimeout(loadNextZone, 300);
-        };
-        
-        document.body.appendChild(script);
-      }
-      
-      // Начинаем загрузку после DOMContentLoaded
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          setTimeout(loadNextZone, 1000);
-        });
-      } else {
-        setTimeout(loadNextZone, 1000);
-      }
-    })();
+  
+  <!-- Popunder (406421) -->
+  <script 
+    async 
+    src="https://js.wpadmngr.com/static/adManager.js" 
+    data-admpid="406421"
+    onload="console.log('[Ads] Popunder loaded (406421)')"
+    onerror="console.error('[Ads] Popunder failed (406421)')">
+  </script>
+
+  <!-- Web Push (406423) -->
+  <script 
+    async 
+    src="https://js.wpadmngr.com/static/adManager.js" 
+    data-admpid="406423"
+    onload="console.log('[Ads] Web Push loaded (406423)')"
+    onerror="console.error('[Ads] Web Push failed (406423)')">
+  </script>
+
+  <!-- Inpage Push (406425) -->
+  <script 
+    async 
+    src="https://js.wpadmngr.com/static/adManager.js" 
+    data-admpid="406425"
+    onload="console.log('[Ads] Inpage Push loaded (406425)')"
+    onerror="console.error('[Ads] Inpage Push failed (406425)')">
+  </script>
+
+  <!-- Zone 4 (406397) -->
+  <script 
+    async 
+    src="https://js.wpadmngr.com/static/adManager.js" 
+    data-admpid="406397"
+    onload="console.log('[Ads] Zone 4 loaded (406397)')"
+    onerror="console.error('[Ads] Zone 4 failed (406397)')">
   </script>
 
   <!-- ============================================ -->
