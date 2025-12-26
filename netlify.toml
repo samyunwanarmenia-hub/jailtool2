@@ -17,7 +17,7 @@
   for = "/index.html"
   [headers.values]
     # Ensure clickadilla scripts are allowed
-    Content-Security-Policy = "default-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' data: blob: js.wpadmngr.com autographmarquisbuffet.com; script-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' js.wpadmngr.com autographmarquisbuffet.com; frame-src 'self' https: http: data: js.wpadmngr.com autographmarquisbuffet.com; img-src 'self' https: http: data: blob: js.wpadmngr.com autographmarquisbuffet.com; style-src 'self' https: http: 'unsafe-inline' js.wpadmngr.com autographmarquisbuffet.com; connect-src 'self' https: http: js.wpadmngr.com autographmarquisbuffet.com; worker-src 'self' blob: js.wpadmngr.com autographmarquisbuffet.com;"
+    Content-Security-Policy = "default-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' data: blob: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; script-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; frame-src 'self' https: http: data: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; img-src 'self' https: http: data: blob: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; style-src 'self' https: http: 'unsafe-inline' js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; connect-src 'self' https: http: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; worker-src 'self' blob: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com;"
     X-Frame-Options = "SAMEORIGIN"
 
 # ============================================
@@ -38,7 +38,7 @@
   for = "/*"
   [headers.values]
     # Разрешаем ВСЕ для рекламных скриптов
-    Content-Security-Policy = "default-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' data: blob:; script-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' js.wpadmngr.com autographmarquisbuffet.com; frame-src 'self' https: http: data: js.wpadmngr.com autographmarquisbuffet.com; img-src 'self' https: http: data: blob: js.wpadmngr.com autographmarquisbuffet.com; style-src 'self' https: http: 'unsafe-inline' js.wpadmngr.com autographmarquisbuffet.com; connect-src 'self' https: http: js.wpadmngr.com autographmarquisbuffet.com; worker-src 'self' blob: js.wpadmngr.com autographmarquisbuffet.com;"
+    Content-Security-Policy = "default-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' data: blob: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; script-src 'self' https: http: 'unsafe-inline' 'unsafe-eval' js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; frame-src 'self' https: http: data: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; img-src 'self' https: http: data: blob: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; style-src 'self' https: http: 'unsafe-inline' js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; connect-src 'self' https: http: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com; worker-src 'self' blob: js.wpadmngr.com www.topcreativeformat.com autographmarquisbuffet.com;"
     
     # Разрешающие CORS для всех доменов
     Access-Control-Allow-Origin = "*"
