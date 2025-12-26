@@ -1,0 +1,82 @@
+.advanced {
+    background-color: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.advanced-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.advanced-intro {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    line-height: 1.9;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.advanced-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+.advanced-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.5rem;
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s;
+    box-shadow: var(--shadow-sm);
+    position: relative; /* For pseudo-element texture */
+    overflow: hidden;
+}
+
+.advanced-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(138, 43, 226, 0.02), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 0;
+}
+
+.advanced-item:hover::before {
+    opacity: 1;
+}
+
+.advanced-item:hover {
+    border-color: var(--color-accent-primary);
+    transform: translateX(8px);
+    box-shadow: var(--glow-md); /* Enhanced glow */
+}
+
+.advanced-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, var(--color-accent-primary), var(--color-accent-tertiary));
+    color: var(--color-bg-primary);
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    box-shadow: 0 0 15px rgba(0, 255, 192, 0.6); /* Stronger glow */
+}
+
+.advanced-item span:last-child {
+    color: var(--color-text-primary);
+    font-size: 1.05rem;
+    font-weight: 500;
+}

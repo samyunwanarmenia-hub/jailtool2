@@ -1,0 +1,33 @@
+.ad-banner {
+  padding: 24px 0;
+}
+
+.ad-banner .ad-slot {
+  min-height: 90px;
+  min-width: 728px;
+  width: 100%;
+  max-width: 728px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--color-border, #1f2a3d);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+  outline: 1px dashed rgba(255, 107, 0, 0.8); /* debug: remove after QA */
+}
+
+.ad-mrec {
+  width: 300px;
+  height: 250px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--color-border, #1f2a3d);
+  border-radius: 10px;
+  overflow: hidden;
+  outline: 1px dashed rgba(255, 107, 0, 0.8); /* debug: remove after QA */
+}

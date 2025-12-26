@@ -1,0 +1,87 @@
+.steps {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.step {
+    flex: 1;
+    min-width: 220px;
+    max-width: 320px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    background-color: var(--color-bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s ease-in-out;
+    position: relative; /* For pseudo-element texture */
+    overflow: hidden;
+}
+
+.step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 255, 192, 0.02), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 0;
+}
+
+.step:hover::before {
+    opacity: 1;
+}
+
+.step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--glow-md), var(--glow-secondary); /* Enhanced glow */
+    border-color: var(--color-accent-tertiary);
+}
+
+.step-number {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-tertiary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 auto 1.5rem;
+    color: var(--color-bg-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 192, 0.7); /* Stronger glow */
+}
+
+.step-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--color-text-primary);
+}
+
+.step-description {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+.step-arrow {
+    font-size: 3rem;
+    color: var(--color-text-muted);
+    align-self: center; /* Center the arrow vertically */
+    margin: 0 1rem;
+    text-shadow: 0 0 5px var(--color-text-muted);
+}

@@ -1,0 +1,11 @@
+# Редиректы для Netlify (Vite SPA)
+# Service Worker должен быть доступен напрямую
+/monetag-sw.js /monetag-sw.js 200
+
+# Файлы верификации Monetag (добавь конкретное имя файла после скачивания)
+# Например: /monetag-verify-12345.txt /monetag-verify-12345.txt 200
+# Или: /monetag.txt /monetag.txt 200
+
+# Все остальные запросы редиректятся на index.html (SPA routing)
+/* /index.html 200
+

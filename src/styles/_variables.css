@@ -1,0 +1,23 @@
+:root {
+    --color-bg-primary: #0A0A1A; /* Deep space blue/purple */
+    --color-bg-secondary: #1A1A2A; /* Slightly lighter background */
+    --color-bg-card: #1F1F3A; /* Darker card background */
+    --color-text-primary: #E0E0E0; /* Bright white for main text */
+    --color-text-secondary: #A0A0C0; /* Light grey for secondary text */
+    --color-text-muted: #606080; /* Muted text for less important info */
+    --color-accent-primary: #00FFC0; /* Neon green/cyan for primary actions */
+    --color-accent-secondary: #8A2BE2; /* Electric purple for secondary accents */
+    --color-accent-tertiary: #00BFFF; /* Deep sky blue for additional accents */
+    --color-border: #303050; /* Darker border */
+    --shadow-sm: 0 2px 8px rgba(0, 255, 192, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 255, 192, 0.15);
+    --shadow-lg: 0 8px 32px rgba(0, 255, 192, 0.2);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+
+    /* New variables for enhanced effects */
+    --glow-primary: 0 0 20px var(--color-accent-primary);
+    --glow-secondary: 0 0 15px var(--color-accent-tertiary);
+    --glow-text: 0 0 8px rgba(0, 255, 192, 0.7);
+}
