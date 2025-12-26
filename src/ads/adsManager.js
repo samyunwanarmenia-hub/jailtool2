@@ -5,22 +5,13 @@ import { wasFiredWithin, markFiredNow } from '../logic/session';
 
 const KEYS = {
   smartlink: 'ads_smartlink_fired_at',
-  popunder: 'ads_popunder_fired_at',
   ctaUnlock: 'ads_cta_unlocked'
-};
-
-const state = {
-  popunderTimer: null
 };
 
 const hasRecentSmartlink = () =>
   wasFiredWithin(KEYS.smartlink, FREQUENCY.smartlinkMs);
 
-const hasRecentPopunder = () =>
-  wasFiredWithin(KEYS.popunder, FREQUENCY.popunderMs);
-
 const markSmartlink = () => markFiredNow(KEYS.smartlink);
-const markPopunder = () => markFiredNow(KEYS.popunder);
 const markCtaUnlocked = () => markFiredNow(KEYS.ctaUnlock);
 
 export const wasCtaUnlocked = () =>
@@ -51,41 +42,9 @@ const openSmartlink = () => {
   markSmartlink();
 };
 
-const firePopunder = () => {
-  state.popunderTimer = null;
-  if (!ADS.popunderScript) return;
-  if (hasRecentPopunder()) return;
-
-  const meetsTimeGate = timeOnPageMs() >= DELAYS.popunderMinMs;
-  if (!meetsTimeGate) {
-    // Re-check once at the minimum boundary to avoid too-early firing.
-    const waitMs = DELAYS.popunderMinMs - timeOnPageMs();
-    state.popunderTimer = window.setTimeout(firePopunder, waitMs);
-    return;
-  }
-
-  // Inject ClickAdila popunder script
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = ADS.popunderScript;
-  const scriptEl = tempDiv.querySelector('script');
-  if (scriptEl) {
-    document.head.appendChild(scriptEl);
-  }
-  markPopunder();
-};
-
-const schedulePopunderAfterAction = () => {
-  if (state.popunderTimer) return;
-  if (hasRecentPopunder()) return;
-  const delay = randomInRange(DELAYS.popunderMinMs, DELAYS.popunderMaxMs);
-  state.popunderTimer = window.setTimeout(() => {
-    firePopunder();
-  }, delay);
-};
-
 export const handleMonetizedAction = (
   userAction,
-  { allowSmartlink = false, allowPopunder = true } = {}
+  { allowSmartlink = false } = {}
 ) => {
   const unlocked = wasCtaUnlocked();
   if (!unlocked) {
@@ -97,9 +56,6 @@ export const handleMonetizedAction = (
 
   if (allowSmartlink) {
     openSmartlink();
-  }
-  if (allowPopunder) {
-    schedulePopunderAfterAction();
   }
   if (typeof userAction === 'function') {
     userAction();
@@ -143,43 +99,8 @@ export const initWebPush = () => {
 };
 
 export const initAutoPopunder = () => {
-  if (!ADS.popunderScript) return () => {};
-
-  const popunderKey = 'ads_popunder_fired_at';
-
-  const hasRecentPopunder = () =>
-    wasFiredWithin(popunderKey, FREQUENCY.popunderMs);
-
-  const markPopunder = () => markFiredNow(popunderKey);
-
-  const firePopunderScript = () => {
-    // Inject ClickAdila popunder script
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = ADS.popunderScript;
-    const scriptEl = tempDiv.querySelector('script');
-    if (scriptEl) {
-      document.head.appendChild(scriptEl);
-    }
-    markPopunder();
-  };
-
-  if (!hasRecentPopunder()) {
-    // Fire immediately on page load
-    firePopunderScript();
-  }
-
-  // Also fire on any user click
-  const handleClick = () => {
-    if (!hasRecentPopunder()) {
-      firePopunderScript();
-    }
-  };
-
-  document.addEventListener('click', handleClick, { once: true });
-
-  return () => {
-    document.removeEventListener('click', handleClick);
-  };
+  // Popunder functionality has been removed
+  return () => {};
 };
 
 const loadBannerInto = (container) => {
