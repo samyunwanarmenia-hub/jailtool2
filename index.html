@@ -81,11 +81,9 @@
       script.type = 'text/javascript';
       script.setAttribute('data-admpid', zone.id);
       
-      // Пробуем разные варианты URL
+      // Используем protocol-relative URL для совместимости с HTTP/HTTPS
       const urls = [
-        'https://js.wpadmngr.com/static/adManager.js',
-        '//js.wpadmngr.com/static/adManager.js',
-        'http://js.wpadmngr.com/static/adManager.js'
+        '//js.wpadmngr.com/static/adManager.js'
       ];
       
       script.src = urls[attempt - 1] || urls[0];
