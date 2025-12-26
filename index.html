@@ -49,19 +49,71 @@
     }
   </script>
 
-  <!-- Web Push Manager Scripts -->
-  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="406421"></script>
-  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="406397"></script>
-  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="406423"></script>
-  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="406425"></script>
-
 </head>
 
 <body>
   <!-- React application mount -->
   <div id="root"></div>
 
-  <!-- Adsterra MREC 300x250 (secondary banner, mid-content) -->
+  <!-- ============================================ -->
+  <!-- ИНИЦИАЛИЗАЦИЯ WEB PUSH MANAGER              -->
+  <!-- Загружаем скрипты ПОСЛЕДОВАТЕЛЬНО           -->
+  <!-- ============================================ -->
+  <script>
+    (function() {
+      'use strict';
+      
+      var zones = [
+        { id: '406421', name: 'popunder3' },    // Popunder
+        { id: '406423', name: 'webpush3' },     // Web Push
+        { id: '406425', name: 'inpage3' },      // Inpage Push
+        { id: '406397', name: 'zone4' }         // Дополнительная зона
+      ];
+      
+      var currentZone = 0;
+      
+      function loadNextZone() {
+        if (currentZone >= zones.length) {
+          console.log('[Ads] All Web Push Manager zones loaded');
+          return;
+        }
+        
+        var zone = zones[currentZone];
+        var script = document.createElement('script');
+        script.src = 'https://js.wpadmngr.com/static/adManager.js';
+        script.async = true;
+        script.setAttribute('data-admpid', zone.id);
+        
+        script.onload = function() {
+          console.log('[Ads] Zone loaded:', zone.name, '(' + zone.id + ')');
+          currentZone++;
+          // Задержка 300мс между зонами для избежания конфликтов
+          setTimeout(loadNextZone, 300);
+        };
+        
+        script.onerror = function() {
+          console.error('[Ads] Failed to load zone:', zone.name, '(' + zone.id + ')');
+          currentZone++;
+          setTimeout(loadNextZone, 300);
+        };
+        
+        document.body.appendChild(script);
+      }
+      
+      // Начинаем загрузку после DOMContentLoaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(loadNextZone, 1000);
+        });
+      } else {
+        setTimeout(loadNextZone, 1000);
+      }
+    })();
+  </script>
+
+  <!-- ============================================ -->
+  <!-- ADSTERRA MREC 300x250                       -->
+  <!-- ============================================ -->
   <div
     id="adsterra-mrec-300"
     style="
@@ -80,9 +132,12 @@
         'params': {}
       };
     </script>
+    <script type="text/javascript" src="//www.topcreativeformat.com/4670b2760ad6a3ba732d7a046b8a00a0/invoke.js"></script>
   </div>
 
-  <!-- Adsterra Banner 728x90 (primary, bottom, desktop-only) -->
+  <!-- ============================================ -->
+  <!-- ADSTERRA BANNER 728x90                      -->
+  <!-- ============================================ -->
   <div
     id="adsterra-banner-728"
     style="
@@ -101,13 +156,10 @@
         'params': {}
       };
     </script>
-
+    <script type="text/javascript" src="//www.topcreativeformat.com/9d529b1d3801b0dc7a28884475a05200/invoke.js"></script>
   </div>
 
-  <!-- PASTE ADDITIONAL BODY AD CODE HERE -->
-  <!-- Instructions: Copy <script>, <div>, or other ad elements from your ad network and paste them between this comment and the closing </body> tag -->
-
-  <!-- React entry -->
+  <!-- React entry point -->
   <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
